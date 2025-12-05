@@ -28,25 +28,25 @@
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### 1. Multi-Step Activity Builder (단계별 작성)
-* **사이드바 내비게이션:** Step 2-1부터 2-5, 3-1까지 이어지는 단계별 UI를 제공하며, 사이드바를 통해 이동이 가능합니다.
+* **사이드바 내비게이션:** Step 2-1부터 2-5, 3-1까지 이어지는 단계별 UI를 제공하고, 사이드바를 통해 이동이 가능합니다.
 * **입력 폼 (Step 2-1 ~ 2-5):**
-    * 활동 이름, 카테고리(Sports, Arts 등), Tier(참여 수준) 입력
-    * 활동 설명 (Description): **실시간 글자 수 카운팅** 및 150자 제한 검증
+    * 활동 이름, 카테고리(Sports, Arts 등), Tier(참여 level) 입력
+    * 활동 설명 (Description): 실시간 글자 수 카운팅 및 150자 제한 검증
     * 주당 활동 시간 (0~40시간) 및 리더십 여부 체크
 
-### 2. Dynamic Impact Score System (동적 점수 산출)
+### 2. Impact Score System (점수 산출)
 사용자의 입력에 따라 활동의 영향력을 실시간으로 계산하여 배지(Badge) 형태로 시각화합니다.
-* **산출 로직:** `Tier 점수` + `Leadership 보너스(+2)` + `시간 보너스(+1, 10시간 초과 시)`
-* **시각화:** 점수 구간에 따라 Low(회색) ~ Exceptional(보라색) 등으로 색상이 동적으로 변경됩니다.
+* **Calculation:** `Tier 점수` + `Leadership 보너스(+2)` + `시간 보너스(+1, 10시간 초과 시)`
+* **Visualization:** 점수 구간에 따라 Low(회색) ~ Exceptional(보라색) 등으로 색상이 동적으로 변경됩니다.
 
 ### 3. Activity Management (Step 3-1)
 * **Card UI:** 추가된 활동을 카드 형태로 요약하여 보여줍니다. (이름, 카테고리, Tier, Impact Score 등 표시)
 * **CRUD:** 활동을 **수정(Edit)** 및 **삭제(Delete)** 할 수 있습니다.
 * **Drag & Drop Sorting:** `@dnd-kit`을 사용하여 활동 카드들의 순서를 드래그 앤 드롭으로 자유롭게 변경할 수 있습니다.
-* **Tutorial Modal:** 최초 진입 시 또는 버튼 클릭 시 사용법을 안내하는 모달을 제공합니다.
+* **Tutorial Modal:** 버튼 클릭 시 사용법을 안내하는 모달을 제공합니다.
 
 ### 4. Data Persistence & API
 * **Spring Boot 연동:** 작성 완료된 활동 데이터는 'Save Activity' 버튼을 통해 백엔드 API로 전송됩니다.
@@ -62,9 +62,7 @@
 
 ### 1. Backend (Spring Boot)
 ```bash
-# 프로젝트 루트에서 backend 폴더로 이동
-cd backend
-
+# 프로젝트 루트에서 실행
 # Gradle 빌드 및 실행
 ./gradlew bootRun
 ````
@@ -72,7 +70,7 @@ cd backend
   * 서버가 `http://localhost:8080`에서 실행됩니다.
   * H2 Console 접속: `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:testdb` 등 설정 확인)
 
-### 2\. Frontend (React)
+### 2. Frontend (React)
 
 ```bash
 # 프로젝트 루트에서 frontend 폴더로 이동
@@ -91,11 +89,11 @@ npm run dev
 
 ## Future Improvements & Limitations
 
-현재 버전은 핵심 기능 구현에 집중하였으며, 시간 제약상 아래 기능들은 추후 업데이트 예정입니다.
+현재 버전은 핵심 기능 구현에 집중했습니다. 시간 제약상 아래 기능들은 구현하지 못했습니다.
 
-  * **반응형 디자인 (Responsive Design):** 현재 데스크탑 환경에 최적화되어 있으며, 모바일 환경 대응은 추후 진행 예정입니다.
-  * **다크 모드 (Dark Mode):** UI 컴포넌트는 다크 모드를 고려하여 설계되었으나, 테마 토글 기능은 아직 구현되지 않았습니다.
-  * **인증 (Authentication):** 현재는 로그인 없이 로컬 세션 단위로 동작하며, 추후 사용자 인증 기능이 추가될 수 있습니다.
+* 반응형 디자인 (Responsive Design): 현재 데스크탑 환경에 최적화되어 있습니다. 모바일 환경 대응은 구현되지 않았습니다.
+* 다크 모드 (Dark Mode): UI 컴포넌트 구조는 다크 모드를 고려했는데, 실제 테마 토글 기능은 구현되지 않았습니다.
+
 
 -----
 
@@ -105,10 +103,19 @@ npm run dev
 
 ```
 src/
-├── components/         # UI 컴포넌트 (StepContent, SortableActivityItem 등)
-├── lib/               # 유틸리티 및 상수 (api.js, constant.jsx, utils.js)
-├── App.jsx            # 메인 라우팅 및 레이아웃
-└── ...
+├── features/
+│   ├── ActivityBuilder/
+│   │   ├── ActivityBuilder.jsx    # 메인 컨테이너
+│   │   └──  StepContent.jsx        # 각 Step별 폼 UI 로직
+│   │   
+│   └── tutorial/
+│       └── TutorialModal.jsx      # 도움말 모달
+├── /
+│   ├── api.js                     # 백엔드 API 호출 함수
+│   ├── constant.jsx               # 상수 데이터 (Tier, Category 등)
+│   └── utils.js                   # 유틸리티 (CN 함수 등)
+├── App.jsx
+└── main.jsx
 ```
 
 ### Backend
@@ -118,7 +125,7 @@ src/main/java/com/example/
 ├── controller/        # ActivityController (REST API 엔드포인트)
 ├── entity/            # Activity (JPA Entity)
 ├── repository/        # ActivityRepository
-├── service/           # 비즈니스 로직
+├── service/           # 비즈니스 로직 - save activity
 └── ...
 ```
 
