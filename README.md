@@ -16,7 +16,7 @@
 * **Core:** React 18, Vite
 * **Styling:** Tailwind CSS, clsx, tailwind-merge (shadcn/ui)
 * **Icons:** lucide-react
-* **Interaction:** **@dnd-kit** (Core, Sortable, Utilities) - *드래그 앤 드롭 정렬 구현*
+* **Interaction:** **@dnd-kit** (Core, Sortable, Utilities) - drag and drop 기능
 
 ### Backend
 <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/H2 Database-003545?style=flat-square&logo=h2&logoColor=white"/>
