@@ -87,7 +87,7 @@ npm run dev
 
 -----
 
-## Future Improvements & Limitations
+## Limitations
 
 현재 버전은 핵심 기능 구현에 집중했습니다. 시간 제약상 아래 기능들은 구현하지 못했습니다.
 
