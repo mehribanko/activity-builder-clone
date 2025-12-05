@@ -96,6 +96,43 @@ npm run dev
 
 
 -----
+## Save Activity API
+
+### 엔드포인트 개요
+
+- **URL**: `POST /api/activities`
+- **목적**: 학생의 과외활동 정보를 데이터베이스에 저장
+- **인증**: 현재 미적용
+
+
+### 요청 (Request)
+**Content-Type**: `application/json`
+
+**필수 필드**:
+- `name` - 활동명 (최대 50자)
+- `category` - 활동 유형 (Sports, Arts, Academic, Community Service, Leadership, Other)
+- `tier` - 활동 레벨 (School, Regional, State, National, International )
+- `description` - 활동 설명 (최대 150자)
+
+**선택 필드**:
+- `hoursPerWeek` - 주당 활동 시간 (0~40, 기본값: 0)
+- `isLeadership` - 리더십 직책 여부 (기본값: false)
+- `impactScore` - 영향력 점수 (프론트엔드에서 자동 계산)
+
+
+### 응답 (Response)
+
+**성공 시 (200 OK)**: 저장된 활동 데이터 반환 (ID 포함)
+**실패 시**:
+- `400 Bad Request` - 필수 필드 누락 또는 유효성 검증 실패
+- `500 Internal Server Error` - 서버 오류
+
+
+### Impact Score 계산 로직
+프론트엔드에서 자동 계산: `Impact Score = 티어 점수 + 리더십 보너스 + 시간 보너스`
+
+
+---
 
 ## Project Structure
 
